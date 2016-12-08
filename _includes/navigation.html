@@ -1,0 +1,13 @@
+<ul>
+  {% assign entries = site.pages | sort: "path" %}
+  {% for page in entries %}
+    {% capture slug %}{{ page.url | split: "/" | last }}{% endcapture %}
+    {% capture current %}{{ page.url | remove: slug | remove: "//" | append: "/" }}{% endcapture %}
+
+    {% if current == include.context %}
+      <li>{{ page.title }}</li>
+      {% include navigation.html context=page.url %}
+    {% endif %}
+
+  {% endfor %}
+</ul>
